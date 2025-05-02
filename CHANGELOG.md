@@ -2,8 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-
 ## 2023-10-13
 - `main.py`: removed Spanish inline comments for dataset generation, database initialization, LangChain setup, and main loop.
 
