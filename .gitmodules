@@ -1,0 +1,3 @@
+[submodule "tools/changelog-generato"]
+	path = tools/changelog-generato
+	url = https://github.com/bpeco/doctrace-ai.git
