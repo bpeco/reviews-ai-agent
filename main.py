@@ -87,19 +87,15 @@ def main():
     mode = args.mode
     model_name = args.model or ('gpt-3.5-turbo' if mode == 'openai' else 'llama3-8b-8192')
 
-    # 1) Asegurarse de tener el CSV de reseñas+meta
     if not os.path.exists('data/complete_reviews.csv'):
         generate_dataset()
 
-    # 2) Inicializar o recargar Chroma DB (force reindex si --force-init)
     init_db(force=args.force_init)
 
-    # 3) Si modo langchain, preparamos el chain
     if mode == 'langchain':
         llama = initialize_llama(model_name)
         chain = build_chain_llama(llama)
 
-    # 4) Bucle principal
     while True:
         business_name = input("❓ Which business do you have a question about? (or 'q' to quit): ")
         if business_name.lower() == 'q':
