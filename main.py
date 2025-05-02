@@ -87,7 +87,7 @@ def main():
     mode = args.mode
     model_name = args.model or ('gpt-3.5-turbo' if mode == 'openai' else 'llama3-8b-8192')
 
-    if not os.path.exists('data/complete_reviews.csv'):
+    if not os.path.exists('data/food_reviews.csv'):
         generate_dataset()
 
     init_db(force=args.force_init)
