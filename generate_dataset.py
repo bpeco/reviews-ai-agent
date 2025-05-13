@@ -48,22 +48,16 @@ def merge_reviews_with_metadata(reviews_path, metadata_path, output_csv_path):
     metadata_df = pd.DataFrame(metadata).drop_duplicates(subset=['gmap_id'])
     metadata_df = filter_food_businesses(metadata_df)
 
+    # Filter reviews
     reviews_df["response"] = reviews_df["resp"].apply(extract_response)
-
-    # Filtrar reviews con texto no vacío
     reviews_df = reviews_df[reviews_df['text'].notna() & (reviews_df['text'].str.strip() != "")]
-
-    # Contar reviews útiles por gmap_id
     review_counts = reviews_df.groupby('gmap_id').size().reset_index(name='review_count')
-
-    # Quedarse con gmap_id con al menos 10 reviews útiles
     valid_gmap_ids = review_counts[review_counts['review_count'] >= 30]['gmap_id']
 
-    # Filtrar ambos dataframes con los gmap_id válidos
     reviews_df = reviews_df[reviews_df['gmap_id'].isin(valid_gmap_ids)]
     metadata_df = metadata_df[metadata_df['gmap_id'].isin(valid_gmap_ids)]
 
-    # Merge final
+    # Final merge
     merged_df = reviews_df.merge(metadata_df, on='gmap_id', how='inner', suffixes=('', '_metadata'))
 
     final_df = merged_df[['name_metadata', 'text', 'response', 'rating', 'avg_rating', 'num_of_reviews']]
