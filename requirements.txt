@@ -1,0 +1,11 @@
+pandas
+langchain
+langchain-chroma
+langchain-groq
+langchain_huggingface
+langchain-community
+tiktoken
+python-dotenv
+openai
+numpy<2
+streamlit

@@ -1,12 +1,9 @@
-# main.py
 import os
 import argparse
 from dotenv import load_dotenv
 from openai import OpenAI
 from generate_dataset import merge_reviews_with_metadata
 from vector import init_db, get_retriever_for_business
-
-# Para LangChain + Llama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 
@@ -15,7 +12,6 @@ client = OpenAI()
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-# Prompt extendido que usan ambos modos
 PROMPT_TEMPLATE = """
 You are an expert in answering questions about restaurants.
 
